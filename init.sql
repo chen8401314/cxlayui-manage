@@ -116,7 +116,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`mobile`,`email`,`password`,`insert_uid`,`insert_time`,`update_time`,`is_del`,`is_job`,`mcode`,`send_time`) values (1,'admin','12345678901','aaa@123.com','0192023a7bbd73250516f069df18b500',NULL,'2017-12-29 17:27:23','2018-04-23 20:47:43',0,0,'181907','2018-01-17 13:42:45');
+insert  into `user`(`id`,`username`,`mobile`,`email`,`password`,`insert_uid`,`insert_time`,`update_time`,`is_del`,`is_job`,`mcode`,`send_time`) values (1,'admin','12345678901','aaa@123.com','21232f297a57a5a743894a0e4a801fc3',NULL,'2017-12-29 17:27:23','2018-04-23 20:47:43',0,0,'181907','2018-01-17 13:42:45');
 
 /*Table structure for table `user_role` */
 
