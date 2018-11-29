@@ -96,4 +96,11 @@ public interface UserService {
 	 * @return
 	 */
 	int setUserLockNum(Integer id,int isLock);
+
+	/**
+	 * 根据ID获取用户信息
+	 * @param id
+	 * @return
+	 */
+	User findUserById(Integer id);
 }

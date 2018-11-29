@@ -18,6 +18,7 @@ public interface IStatusMessage {
 		ERROR("1001","ERROR"),	   //请求失败
 		PARAM_ERROR("1002","PARAM_ERROR"), //请求参数有误
 		SUCCESS_MATCH("1003","SUCCESS_MATCH"), //表示成功匹配
+		PASSWORD_ERROR("1004","PASSWORD_ERROR"), //密码错误
 		NO_LOGIN("1100","NO_LOGIN"), //未登录
 		LOCK("1111","LOCK"); //用户已锁定
 		private String code;

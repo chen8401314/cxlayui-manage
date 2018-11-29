@@ -199,6 +199,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User findUserById(Integer id)
+	{
+		return this.userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
 	public User findUserByName(String name) {
 		return this.userMapper.findUserByName(name);
 	}

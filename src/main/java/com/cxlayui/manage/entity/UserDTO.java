@@ -17,7 +17,7 @@ public class UserDTO {
 
 	private String email;
 	@NotNull(message = "密码不能为空，请您先填写手机号")
-	@MatchPattern(pattern = "^[0-9_a-zA-Z]{6,20}$", message = "用户名或密码有误，请您重新填写")
+	@MatchPattern(pattern = "^[0-9_a-zA-Z]{3,20}$", message = "密码长度为3-20")
 	private String password;
 	@NotNull(message = "图片验证码不能为空，请您先填写验证码")
 	@MatchPattern(pattern = "\\w{4}$", message = "图片验证码有误，请您重新填写")

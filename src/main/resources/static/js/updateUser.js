@@ -2,64 +2,60 @@
  * 修改用户密码
  * */
 //获取路径uri
-var picCode;
 $(function(){
-    picCode = drawPic();
-    //监控（发送验证码）
     layui.use(['form' ,'layer'], function() {
         var form = layui.form;
         var layer = layui.layer;
-        //监控提交
-        form.on("submit(getMsg)",function (data) {
-            //sendMsg();
-            var flag=checkData();
-            if(flag!=false){
-                sendMessage(this,true);
-            }
-            return false;
-        });
-        //确认手机号
+        //修改密码
         form.on("submit(updatePwd)",function () {
             updatePwd();
             return false;
         });
-        //确认修改密码
-        form.on("submit(setPwd)",function () {
-            setPwd();
-            return false;
-        });
     })
 })
-function checkData(){
-//  校验
-    var mobile=$("#telephone").val();
-    var code=$("#picCode").val();
-    if("ok"!=ValidateUtils.checkMobile(mobile)){
+
+function updatePwd(){
+ var oldPassword=$("#oldPassword").val();
+    var newPassword=$("#newPassword").val();
+    var secondNewPassword=$("#secondNewPassword").val();
+    if(secondNewPassword!=newPassword){
         //tips层-右
-        layer.tips(ValidateUtils.checkMobile(mobile), '#telephone', {
+        $("#newPassword").val("");
+        $("#secondNewPassword").val("");
+        layer.tips("两次输入的密码不一致", '#newPassword', {
             tips: [2, '#78BA32'], //还可配置颜色
             tipsMore: true
         });
         return false;
     }
-    if("ok"!=ValidateUtils.checkPicCode(code)){
+    if("ok"!=ValidateUtils.checkSimplePassword(secondNewPassword) || "ok"!=ValidateUtils.checkSimplePassword(newPassword)){
         //tips层-右
-        layer.tips(ValidateUtils.checkPicCode(code), '#canvas', {
-            tips: [2, '#78BA32'], //还可配置颜色
-            tipsMore: true
-        });
+        $("#secondNewPassword").val("");
+        $("#newPassword").val("");
+        layer.alert("密码格式有误，请您重新输入");
         return false;
     }
-    if(picCode.toLowerCase()!=code.toLowerCase()){
-        //tips层-右
-        layer.tips("请您输入正确的验证码", '#canvas', {
-            tips: [2, '#78BA32'], //还可配置颜色
-            tipsMore: true
-        });
-        return false;
-    }
+    $.post("/user/setPwd",{"oldPassword":oldPassword,"newPassword":newPassword,"secondNewPassword":secondNewPassword},function(data){
+        console.log("data:"+data);
+        if(data.code=="1000"){
+            layer.alert("操作成功",function () {
+                layer.closeAll();
+                window.location.href="/logout";
+            });
+        }else{
+            layer.alert(data.message,function () {
+                layer.closeAll();
+                $("#secondNewPassword").val("");
+                $("#newPassword").val("");
+                $("#oldPassword").val("");
+                //window.location.href="/index";
+            });
+        }
+    });
 }
-var wait=60;
+
+
+/*var wait=60;
 function sendMessage(o,flag){
     if (!flag) {
         return false;
@@ -102,76 +98,4 @@ function sendMessage(o,flag){
             send(o, flag)
         }, 1000)
     }
-}
-function updatePwd(){
-    var flag=checkData();
-    if(flag!=false){
-        var mobileCode=$("#mobileCode").val();
-        if("ok"!=ValidateUtils.checkCode(mobileCode)){
-            //tips层-右
-            layer.tips("请您输入正确的验证码", '#getMsgBtn', {
-                tips: [2, '#78BA32'], //还可配置颜色
-                tipsMore: true
-            });
-            return false;
-        }
-        $.post("/user/updatePwd",{"mobile":$("#telephone").val(),"picCode":$("#picCode").val(),"mobileCode":mobileCode},function(data){
-            console.log("data:"+data)
-            if(data.code=="1000"){
-                layer.closeAll();
-                layer.open({
-                    type:1,
-                    title: "设置新密码",
-                    fixed:false,
-                    resize :false,
-                    shadeClose: true,
-                    area: ['450px'],
-                    content:$('#pwdDiv')
-                });
-            }else{
-                picCode=drawPic();
-                $("#picCode").val("");
-                $("#mobileCode").val("");
-                layer.alert(data.message);
-            }
-        });
-
-    }
-}
-function setPwd(){
-    var pwd=$("#pwd").val();
-    var isPwd=$("#isPwd").val();
-    if(pwd!=isPwd){
-        //tips层-右
-        $("#isPwd").val("");
-        $("#isPwd").val("");
-        layer.tips("两次输入的密码不一致", '#isPwd', {
-            tips: [2, '#78BA32'], //还可配置颜色
-            tipsMore: true
-        });
-        return false;
-    }
-    if("ok"!=ValidateUtils.checkSimplePassword(pwd) || "ok"!=ValidateUtils.checkSimplePassword(isPwd)){
-        //tips层-右
-        $("#pwd").val("");
-        $("#pwd").val("");
-        $("#isPwd").val("");
-        $("#isPwd").val("");
-        layer.alert("密码格式有误，请您重新输入");
-        return false;
-    }
-    $.post("/user/setPwd",{"pwd":pwd,"isPwd":isPwd},function(data){
-        console.log("data:"+data);
-        if(data.code=="1000"){
-            layer.alert("操作成功",function () {
-                layer.closeAll();
-                window.location.href="/logout";
-            });
-        }else{
-            layer.alert(data.message,function () {
-                layer.closeAll();
-                //window.location.href="/index";
-            });
-        }
-    });
-}
+}*/

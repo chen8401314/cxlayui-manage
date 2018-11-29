@@ -44,7 +44,7 @@ public class ValidateUtil {
 		}
 
 		private static final Pattern SIMPLE_PASSWORD = Pattern
-			.compile("^[0-9_a-zA-Z]{6,20}$");
+			.compile("^[0-9_a-zA-Z]{3,20}$");
 		public static boolean isSimplePassword(String str) {
 			return StringUtils.isNotBlank(str) && SIMPLE_PASSWORD.matcher(str).matches();
 		}

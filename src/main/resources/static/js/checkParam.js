@@ -47,7 +47,7 @@ var ValidateUtils = {
         return "ok";
     },
     checkSimplePassword : function(password){
-        if(!password.match(/^[0-9_a-zA-Z]{6,20}$/)){
+        if(!password.match(/^[0-9_a-zA-Z]{3,20}$/)){
             $("input[name='password']").val("");
             $("input[name='password']").focus();
             return 	"密码格式不正确！";
