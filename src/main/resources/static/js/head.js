@@ -28,7 +28,7 @@ var getMenus=function(data){
     for(var i=0;i < data.length;i++){
         var node=data[i];
         if( node.istype==0){
-            if(node.pId==0){
+            if(node.pid==0){
                 var li=$("<li class='layui-nav-item' flag='"+node.id+"'></li>");
                 //父级无page
                 var a=$("<a class='' href='javascript:;'>"+node.name+"</a>");
@@ -62,7 +62,7 @@ var getMenus=function(data){
 function getParentArry(id, arry) {
     var newArry = new Array();
     for (var x in arry) {
-        if (arry[x].pId == id)
+        if (arry[x].pid == id)
             newArry.push(arry[x]);
     }
     return newArry;

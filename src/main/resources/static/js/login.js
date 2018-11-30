@@ -97,9 +97,7 @@ function login(){
         $.post("/user/login",$("#useLogin").serialize(),function(data){
             console.log("data:"+data)
             if(data.code=="1000"){
-                layer.alert("登录成功",function () {
-                    window.location.href="/user/userList";
-                });
+                window.location.href="/user/userList";
             }else{
                 $("#password").val("");
                 picCode=drawPic();

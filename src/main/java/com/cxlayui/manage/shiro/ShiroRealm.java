@@ -55,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		// 获取当前登陆用户
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
-		if (user.getMobile().equals("18516596566")) {
+		if (user.getUsername().equals("admin")) {
 			// 超级管理员，添加所有角色、添加所有权限
 			authorizationInfo.addRole("*");
 			authorizationInfo.addStringPermission("*");

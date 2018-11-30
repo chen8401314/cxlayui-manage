@@ -155,8 +155,8 @@ function listToTreeJson(data){
             var itemArr=[];
             for(var i=0;i < data.length;i++){
                 var node=data[i];
-                if(node.pId==parentId && parentId!=null){
-                    var newNode={name:node.name,spread:true,id:node.id,pid:node.pId,children:getJsonTree(data,node.id)};
+                if(node.pid==parentId && parentId!=null){
+                    var newNode={name:node.name,spread:true,id:node.id,pid:node.pid,children:getJsonTree(data,node.id)};
                     itemArr.push(newNode);
                 }
             }
