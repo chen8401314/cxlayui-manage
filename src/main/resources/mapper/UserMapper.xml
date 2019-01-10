@@ -263,7 +263,7 @@
   <!--=Start findUserByName 根据用户名获取用户数据-->
   <select id="findUserByName" resultType="com.cxlayui.manage.pojo.User" >
     select
-    id, username, mobile, email, insert_uid insertUid, insert_time insertTime, update_time updateTime, is_del isDel,is_job isJob,mcode,send_time sendTime
+    id, username, mobile,password, email, insert_uid insertUid, insert_time insertTime, update_time updateTime, is_del isDel,is_job isJob,mcode,send_time sendTime
     from user
     WHERE username=#{username} and is_del=0
   </select>

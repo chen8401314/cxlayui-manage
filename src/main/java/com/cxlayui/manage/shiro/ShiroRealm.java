@@ -92,28 +92,22 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authenticationToken)
 			throws AuthenticationException {
-		//TODO
 		//UsernamePasswordToken用于存放提交的登录信息
 		UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
 		logger.info("用户登录认证：验证当前Subject时获取到token为：" + ReflectionToStringBuilder
 				.toString(token, ToStringStyle.MULTI_LINE_STYLE));
 		String username = token.getUsername();
-		String password = String.valueOf(token.getPassword());
 		// 调用数据层
 		User user = userMapper.findUserByName(username);
         if(user==null) {
         	 throw new UnknownAccountException();
-        }
-        user = userMapper.findUser(username, password);
-        if(user==null) {
-        	  throw new IncorrectCredentialsException(); 
         }
 		logger.debug("用户登录认证！用户信息user：" + user);
 			// 密码存在
 			// 第一个参数 ，登陆后，需要在session保存数据
 			// 第二个参数，查询到密码(加密规则要和自定义的HashedCredentialsMatcher中的HashAlgorithmName散列算法一致)
 			// 第三个参数 ，realm名字
-			return new SimpleAuthenticationInfo(user, DigestUtils.md5Hex(password),
+			return new SimpleAuthenticationInfo(user, DigestUtils.md5Hex(user.getPassword()),
 					getName());
 	}
 }

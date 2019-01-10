@@ -1,10 +1,12 @@
 package com.cxlayui.manage.service;
 
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.cxlayui.manage.dao.TestInfoDao;
+import com.cxlayui.manage.dao.TestInfoMapper;
+import com.cxlayui.manage.entity.TestInfoSearchDTO;
+import com.cxlayui.manage.pojo.TestInfo;
+import com.cxlayui.manage.utils.PageDataResult;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cxlayui.manage.dao.TestInfoDao;
-import com.cxlayui.manage.dao.TestInfoMapper;
-import com.cxlayui.manage.entity.TestInfoSearchDTO;
-import com.cxlayui.manage.entity.UserRolesVO;
-import com.cxlayui.manage.entity.UserSearchDTO;
-import com.cxlayui.manage.pojo.TestInfo;
-import com.cxlayui.manage.pojo.User;
-import com.cxlayui.manage.pojo.UserRoleKey;
-import com.cxlayui.manage.utils.PageDataResult;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import java.util.List;
 
 /**  
 * @ClassName: TestInfoServiceImpl 
